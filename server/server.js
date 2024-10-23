@@ -13,8 +13,8 @@ const port = process.env.PORT || 5000;
 
 // Determine allowed origins based on environment
 const allowedOrigins = process.env.NODE_ENV === 'production'
-    ? ['https://desdemona.onrender.com', 'https://desdemona-fe.onrender.com']
-    : ['http://localhost:3000', 'https://desdemona-fe.onrender.com'];
+    ? ['https://dss-desdemona.onrender.com', 'https://desdemonapp.onrender.com']
+    : ['http://localhost:3000', 'https://desdemonapp.onrender.com'];
 
 // Update CORS configuration
 app.use(cors({
