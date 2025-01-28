@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Tooltip, Checkbox, Modal, Slider, Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 
-const Task = ({ task, onTaskChange, onTaskFeatureChange, updateAllTaskFeatures, allTaskFeatures, featureMapping }) => {
+const Task = ({ task, onTaskChange, onTaskFeatureChange, updateAllTaskFeatures, allTaskFeatures, featureMapping, onSaveTask, taskKey }) => {
   const [popupVisible, setPopupVisible] = useState(false);
   const [taskFeatures, setTaskFeatures] = useState(task.features);
-  const [originalTaskFeatures, setOriginalTaskFeatures] = useState(task.features); // Backup of original task features
-  const [selectedOptions, setSelectedOptions] = useState(task.features); // Initialize selectedOptions with task.features
-  const [isChecked, setIsChecked] = useState(false); // State for checkbox status
+  const [originalTaskFeatures, setOriginalTaskFeatures] = useState(task.features);
+  const [selectedOptions, setSelectedOptions] = useState(task.features);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (task, isChecked, option) => {
     setIsChecked(isChecked);
@@ -28,12 +28,12 @@ const Task = ({ task, onTaskChange, onTaskFeatureChange, updateAllTaskFeatures, 
   };
 
   const showPopup = () => {
-    setOriginalTaskFeatures(taskFeatures); // Backup the current features when the modal is opened
+    setOriginalTaskFeatures(taskFeatures);
     setPopupVisible(true);
   };
 
   const closePopup = () => {
-    setTaskFeatures(originalTaskFeatures); // Restore the original features if the modal is closed without saving
+    setTaskFeatures(originalTaskFeatures);
     setPopupVisible(false);
   };
 
@@ -50,13 +50,16 @@ const Task = ({ task, onTaskChange, onTaskFeatureChange, updateAllTaskFeatures, 
     // Update all task features without changing the checkbox status
     updateAllTaskFeatures(task.field, task.name, newSelectedOption);
 
-    setPopupVisible(false); // Close the modal
+    // Call the onSaveTask function to update the server
+    onSaveTask(taskKey, taskFeatures);
+
+    setPopupVisible(false);
   };
 
   useEffect(() => {
     setTaskFeatures(task.features);
     setSelectedOptions(task.features);
-    setIsChecked(task.isChecked); // Set initial checkbox state if task has isChecked property
+    setIsChecked(task.isChecked);
   }, [task.features, task.isChecked]);
 
   return (
@@ -89,10 +92,6 @@ const Task = ({ task, onTaskChange, onTaskFeatureChange, updateAllTaskFeatures, 
                   >
                     {task.name}
                   </span>
-                  {/*<span>
-                    {JSON.stringify(taskFeatures)}
-                  </span>
-                  */}
                 </div>
               </Checkbox>
               <EditOutlined
@@ -120,11 +119,11 @@ const Task = ({ task, onTaskChange, onTaskFeatureChange, updateAllTaskFeatures, 
           </Button>,
         ]}
         centered
-        maskClosable={false}  // Prevent closing the modal by clicking outside of it
+        maskClosable={false}
       >
         <h1>{task.field}</h1>
         <h2>{task.name}</h2>
-        <p>Checkbox is {isChecked ? "checked" : "unchecked"}</p> {/* Display checkbox status */}
+        <p>Checkbox is {isChecked ? "checked" : "unchecked"}</p>
         {Object.keys(taskFeatures).map((feature) => (
           <Row key={feature} style={{ marginBottom: '10px' }}>
             <Col span={16}>

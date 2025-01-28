@@ -104,7 +104,7 @@ const App = () => {
 
   const runSimulation = async (values) => {
     try {
-      const response = await fetch(`${apiUrl}/simulation`, {  // Use the API URL from config.js
+      const response = await fetch(`${apiUrl}/simulation`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -116,16 +116,8 @@ const App = () => {
 
       if (data.message && Array.isArray(data.message)) {
         const msg = data.message
-          .map((result) => {
-            const resultMessage  = result.optimalOperatorsMessage;
-
-            return `
-              <div>
-                ${resultMessage}
-              </div>
-            `;
-          })
-          .join("");
+          .map((result) => result.optimalOperatorsMessage)
+          .join("\n\n");
 
         setMessage(msg);
         setResultPopupVisible(true);

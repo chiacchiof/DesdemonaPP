@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Collapse, Checkbox, Tooltip, Button, Slider, Modal } from 'antd';
+import { Card, Row, Col, Collapse, Checkbox, Tooltip, Button, Slider, Modal, notification } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
-// Rimuovi l'importazione locale di config
-// import { operators as initialOperators } from '../config';
+import apiUrl from '../config';
 
 const { Panel } = Collapse;
 
@@ -12,6 +11,7 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
     const [localFeatures, setLocalFeatures] = useState({});
     const [operators, setOperators] = useState(initialOperators); // Usa il prop passato
     const [selectedOperators, setSelectedOperators] = useState([]);
+    const [isUpdating, setIsUpdating] = useState(false);
 
     useEffect(() => {
         onOperatorsChange(selectedOperators); // Notify parent component
@@ -35,38 +35,74 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
         }));
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (selectedOperator) {
-            const updatedOperators = operators.map((operator) => {
-                if (operator.name === selectedOperator.name) {
-                    return {
-                        ...operator,
-                        features: localFeatures,
-                    };
-                }
-                return operator;
-            });
-            setOperators(updatedOperators);
+            setIsUpdating(true);
+            try {
+                const featureUpdates = Object.entries(localFeatures).map(([featureName, newValue]) => ({
+                    featureName,
+                    newValue: parseFloat(newValue)
+                }));
 
-            // Update the selected operators with the updated features
-            const updatedSelectedOperators = selectedOperators.map((operator) => {
-                if (operator.name === selectedOperator.name) {
-                    return {
-                        ...operator,
-                        features: localFeatures,
-                    };
-                }
-                return operator;
-            });
-            setSelectedOperators(updatedSelectedOperators);
+                const response = await fetch(`${apiUrl}/modifyOperatorFeatures/bulk`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        operatorName: selectedOperator.name,
+                        features: featureUpdates
+                    })
+                });
 
-            // Recalculate selectedOperator with updated features
-            setSelectedOperator((prevOperator) => ({
-                ...prevOperator,
-                features: localFeatures,
-            }));
+                const data = await response.json();
+
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to update operator features');
+                }
+
+                // Update local state with the returned operator data
+                const updatedOperator = data.updatedOperator;
+
+                // Update all operators
+                const updatedOperators = operators.map((operator) => {
+                    if (operator.name === selectedOperator.name) {
+                        return updatedOperator;
+                    }
+                    return operator;
+                });
+                setOperators(updatedOperators);
+
+                // Update selected operators
+                const updatedSelectedOperators = selectedOperators.map((operator) => {
+                    if (operator.name === selectedOperator.name) {
+                        return updatedOperator;
+                    }
+                    return operator;
+                });
+                setSelectedOperators(updatedSelectedOperators);
+
+                // Show success notification
+                notification.success({
+                    message: 'Features Updated Successfully',
+                    description: data.featuresMessage,
+                    placement: 'topRight',
+                    duration: 3
+                });
+
+            } catch (error) {
+                // Show error notification
+                notification.error({
+                    message: 'Update Failed',
+                    description: error.message || 'Failed to update operator features',
+                    placement: 'topRight',
+                    duration: 4
+                });
+            } finally {
+                setIsUpdating(false);
+                setPopupVisible(false);
+            }
         }
-        setPopupVisible(false);
     };
 
     const handleSelectAllChange = (e) => {
@@ -183,10 +219,15 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
                     maskClosable={false}  // Prevent closing the modal by clicking outside of it
                     onCancel={handleClosePopup}
                     footer={[
-                        <Button key="cancel" onClick={handleClosePopup}>
+                        <Button key="cancel" onClick={handleClosePopup} disabled={isUpdating}>
                             Cancel
                         </Button>,
-                        <Button key="save" type="primary" onClick={handleSave}>
+                        <Button 
+                            key="save" 
+                            type="primary" 
+                            onClick={handleSave}
+                            loading={isUpdating}
+                        >
                             Save
                         </Button>,
                     ]}
