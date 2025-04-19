@@ -1,0 +1,1000 @@
+{
+    "operators": [
+        {
+            "name": "Operator 1",
+            "features": {
+                "Memory": 4.683,
+                "Lev. Profes Train": 3.26,
+                "Lev. Educ.": 3.988,
+                "Work U. Press.": 3.227,
+                "Workload Man.": 0.96,
+                "Soft Skills": 4.245,
+                "Dec. Making": 4.027,
+                "Observance": 4.807,
+                "Manual Dex.": 4.646
+            }
+        },
+        {
+            "name": "Operator 2",
+            "features": {
+                "Memory": "3.654",
+                "Lev. Profes Train": "3.643",
+                "Lev. Educ.": "4.568",
+                "Work U. Press.": "3.660",
+                "Workload Man.": "4.610",
+                "Soft Skills": "3.563",
+                "Dec. Making": "4.065",
+                "Observance": "3.421",
+                "Manual Dex.": "3.150"
+            }
+        },
+        {
+            "name": "Operator 3",
+            "features": {
+                "Memory": "3.904",
+                "Lev. Profes Train": "3.574",
+                "Lev. Educ.": "3.771",
+                "Work U. Press.": "3.228",
+                "Workload Man.": "4.046",
+                "Soft Skills": "4.102",
+                "Dec. Making": "4.816",
+                "Observance": "3.210",
+                "Manual Dex.": "4.488"
+            }
+        },
+        {
+            "name": "Operator 4",
+            "features": {
+                "Memory": "3.743",
+                "Lev. Profes Train": "3.465",
+                "Lev. Educ.": "4.115",
+                "Work U. Press.": "4.689",
+                "Workload Man.": "3.626",
+                "Soft Skills": "3.138",
+                "Dec. Making": "4.151",
+                "Observance": "4.385",
+                "Manual Dex.": "3.327"
+            }
+        },
+        {
+            "name": "Operator 5",
+            "features": {
+                "Memory": "4.324",
+                "Lev. Profes Train": "4.813",
+                "Lev. Educ.": "4.113",
+                "Work U. Press.": "3.512",
+                "Workload Man.": "4.734",
+                "Soft Skills": "4.138",
+                "Dec. Making": "3.419",
+                "Observance": "4.999",
+                "Manual Dex.": "3.372"
+            }
+        },
+        {
+            "name": "Operator 6",
+            "features": {
+                "Memory": "3.240",
+                "Lev. Profes Train": "4.909",
+                "Lev. Educ.": "3.175",
+                "Work U. Press.": "3.989",
+                "Workload Man.": "4.204",
+                "Soft Skills": "4.000",
+                "Dec. Making": "3.522",
+                "Observance": "4.964",
+                "Manual Dex.": "4.398"
+            }
+        },
+        {
+            "name": "Operator 7",
+            "features": {
+                "Memory": "3.586",
+                "Lev. Profes Train": "4.242",
+                "Lev. Educ.": "4.296",
+                "Work U. Press.": "3.857",
+                "Workload Man.": "3.485",
+                "Soft Skills": "4.185",
+                "Dec. Making": "4.284",
+                "Observance": "4.104",
+                "Manual Dex.": "3.714"
+            }
+        },
+        {
+            "name": "Operator 8",
+            "features": {
+                "Memory": "3.427",
+                "Lev. Profes Train": "4.235",
+                "Lev. Educ.": "3.871",
+                "Work U. Press.": "3.060",
+                "Workload Man.": "4.444",
+                "Soft Skills": "3.517",
+                "Dec. Making": "3.422",
+                "Observance": "3.892",
+                "Manual Dex.": "4.321"
+            }
+        },
+        {
+            "name": "Operator 9",
+            "features": {
+                "Memory": "4.743",
+                "Lev. Profes Train": "4.455",
+                "Lev. Educ.": "4.111",
+                "Work U. Press.": "3.827",
+                "Workload Man.": "4.201",
+                "Soft Skills": "3.251",
+                "Dec. Making": "4.844",
+                "Observance": "3.932",
+                "Manual Dex.": "4.396"
+            }
+        },
+        {
+            "name": "Operator 10",
+            "features": {
+                "Memory": "4.750",
+                "Lev. Profes Train": "4.880",
+                "Lev. Educ.": "3.235",
+                "Work U. Press.": "3.329",
+                "Workload Man.": "3.965",
+                "Soft Skills": "4.216",
+                "Dec. Making": "4.896",
+                "Observance": "3.520",
+                "Manual Dex.": "4.020"
+            }
+        },
+        {
+            "name": "Operator 11",
+            "features": {
+                "Memory": "4.851",
+                "Lev. Profes Train": "4.346",
+                "Lev. Educ.": "4.527",
+                "Work U. Press.": "4.392",
+                "Workload Man.": "3.614",
+                "Soft Skills": "4.344",
+                "Dec. Making": "3.275",
+                "Observance": "3.204",
+                "Manual Dex.": "4.270"
+            }
+        },
+        {
+            "name": "Operator 12",
+            "features": {
+                "Memory": "3.122",
+                "Lev. Profes Train": "4.047",
+                "Lev. Educ.": "4.881",
+                "Work U. Press.": "3.829",
+                "Workload Man.": "3.158",
+                "Soft Skills": "3.677",
+                "Dec. Making": "4.663",
+                "Observance": "3.243",
+                "Manual Dex.": "4.836"
+            }
+        },
+        {
+            "name": "Operator 13",
+            "features": {
+                "Memory": "3.464",
+                "Lev. Profes Train": "3.973",
+                "Lev. Educ.": "4.296",
+                "Work U. Press.": "4.563",
+                "Workload Man.": "3.560",
+                "Soft Skills": "4.912",
+                "Dec. Making": "4.082",
+                "Observance": "3.708",
+                "Manual Dex.": "3.376"
+            }
+        },
+        {
+            "name": "Operator 14",
+            "features": {
+                "Memory": "3.821",
+                "Lev. Profes Train": "4.815",
+                "Lev. Educ.": "4.076",
+                "Work U. Press.": "4.172",
+                "Workload Man.": "4.438",
+                "Soft Skills": "4.374",
+                "Dec. Making": "4.008",
+                "Observance": "4.779",
+                "Manual Dex.": "3.080"
+            }
+        },
+        {
+            "name": "Operator 15",
+            "features": {
+                "Memory": "4.060",
+                "Lev. Profes Train": "3.037",
+                "Lev. Educ.": "3.488",
+                "Work U. Press.": "4.886",
+                "Workload Man.": "4.810",
+                "Soft Skills": "3.575",
+                "Dec. Making": "3.905",
+                "Observance": "4.811",
+                "Manual Dex.": "4.092"
+            }
+        },
+        {
+            "name": "Operator 16",
+            "features": {
+                "Memory": "4.776",
+                "Lev. Profes Train": "3.796",
+                "Lev. Educ.": "4.898",
+                "Work U. Press.": "4.668",
+                "Workload Man.": "4.712",
+                "Soft Skills": "4.856",
+                "Dec. Making": "3.914",
+                "Observance": "4.767",
+                "Manual Dex.": "3.297"
+            }
+        },
+        {
+            "name": "Operator 17",
+            "features": {
+                "Memory": "4.005",
+                "Lev. Profes Train": "4.498",
+                "Lev. Educ.": "4.103",
+                "Work U. Press.": "3.080",
+                "Workload Man.": "4.807",
+                "Soft Skills": "4.264",
+                "Dec. Making": "4.862",
+                "Observance": "4.307",
+                "Manual Dex.": "4.007"
+            }
+        },
+        {
+            "name": "Operator 18",
+            "features": {
+                "Memory": "4.207",
+                "Lev. Profes Train": "3.117",
+                "Lev. Educ.": "4.739",
+                "Work U. Press.": "3.412",
+                "Workload Man.": "3.065",
+                "Soft Skills": "4.014",
+                "Dec. Making": "4.783",
+                "Observance": "4.700",
+                "Manual Dex.": "3.869"
+            }
+        },
+        {
+            "name": "Operator 19",
+            "features": {
+                "Memory": "4.408",
+                "Lev. Profes Train": "3.445",
+                "Lev. Educ.": "4.279",
+                "Work U. Press.": "4.106",
+                "Workload Man.": "4.688",
+                "Soft Skills": "3.173",
+                "Dec. Making": "4.154",
+                "Observance": "4.036",
+                "Manual Dex.": "4.926"
+            }
+        },
+        {
+            "name": "Operator 20",
+            "features": {
+                "Memory": "3.565",
+                "Lev. Profes Train": "4.585",
+                "Lev. Educ.": "3.522",
+                "Work U. Press.": "4.839",
+                "Workload Man.": "3.855",
+                "Soft Skills": "3.773",
+                "Dec. Making": "4.358",
+                "Observance": "4.417",
+                "Manual Dex.": "3.466"
+            }
+        },
+        {
+            "name": "Operator 21",
+            "features": {
+                "Memory": "4.615",
+                "Lev. Profes Train": "4.252",
+                "Lev. Educ.": "4.995",
+                "Work U. Press.": "4.691",
+                "Workload Man.": "3.025",
+                "Soft Skills": "4.821",
+                "Dec. Making": "3.944",
+                "Observance": "4.340",
+                "Manual Dex.": "4.094"
+            }
+        },
+        {
+            "name": "Operator 22",
+            "features": {
+                "Memory": "3.850",
+                "Lev. Profes Train": "3.913",
+                "Lev. Educ.": "3.162",
+                "Work U. Press.": "4.809",
+                "Workload Man.": "4.181",
+                "Soft Skills": "3.148",
+                "Dec. Making": "3.899",
+                "Observance": "4.640",
+                "Manual Dex.": "4.677"
+            }
+        },
+        {
+            "name": "Operator 23",
+            "features": {
+                "Memory": "4.706",
+                "Lev. Profes Train": "4.166",
+                "Lev. Educ.": "4.726",
+                "Work U. Press.": "3.291",
+                "Workload Man.": "4.028",
+                "Soft Skills": "3.601",
+                "Dec. Making": "4.143",
+                "Observance": "3.778",
+                "Manual Dex.": "4.739"
+            }
+        },
+        {
+            "name": "Operator 24",
+            "features": {
+                "Memory": "4.178",
+                "Lev. Profes Train": "3.039",
+                "Lev. Educ.": "4.943",
+                "Work U. Press.": "3.071",
+                "Workload Man.": "4.597",
+                "Soft Skills": "4.357",
+                "Dec. Making": "3.448",
+                "Observance": "3.891",
+                "Manual Dex.": "3.489"
+            }
+        },
+        {
+            "name": "Operator 25",
+            "features": {
+                "Memory": "4.335",
+                "Lev. Profes Train": "3.477",
+                "Lev. Educ.": "3.396",
+                "Work U. Press.": "4.409",
+                "Workload Man.": "3.865",
+                "Soft Skills": "4.431",
+                "Dec. Making": "4.016",
+                "Observance": "4.034",
+                "Manual Dex.": "4.136"
+            }
+        },
+        {
+            "name": "Operator 26",
+            "features": {
+                "Memory": "4.879",
+                "Lev. Profes Train": "3.034",
+                "Lev. Educ.": "4.914",
+                "Work U. Press.": "4.057",
+                "Workload Man.": "4.948",
+                "Soft Skills": "3.460",
+                "Dec. Making": "3.525",
+                "Observance": "4.580",
+                "Manual Dex.": "4.409"
+            }
+        },
+        {
+            "name": "Operator 27",
+            "features": {
+                "Memory": "3.910",
+                "Lev. Profes Train": "3.777",
+                "Lev. Educ.": "4.113",
+                "Work U. Press.": "4.201",
+                "Workload Man.": "3.468",
+                "Soft Skills": "3.331",
+                "Dec. Making": "3.999",
+                "Observance": "3.325",
+                "Manual Dex.": "4.497"
+            }
+        },
+        {
+            "name": "Operator 28",
+            "features": {
+                "Memory": "3.984",
+                "Lev. Profes Train": "3.389",
+                "Lev. Educ.": "3.149",
+                "Work U. Press.": "3.700",
+                "Workload Man.": "4.200",
+                "Soft Skills": "3.744",
+                "Dec. Making": "4.484",
+                "Observance": "3.948",
+                "Manual Dex.": "3.653"
+            }
+        },
+        {
+            "name": "Operator 29",
+            "features": {
+                "Memory": "4.000",
+                "Lev. Profes Train": "3.686",
+                "Lev. Educ.": "4.932",
+                "Work U. Press.": "3.759",
+                "Workload Man.": "4.888",
+                "Soft Skills": "4.396",
+                "Dec. Making": "4.841",
+                "Observance": "3.744",
+                "Manual Dex.": "3.336"
+            }
+        },
+        {
+            "name": "Operator 30",
+            "features": {
+                "Memory": "4.325",
+                "Lev. Profes Train": "4.472",
+                "Lev. Educ.": "3.240",
+                "Work U. Press.": "3.319",
+                "Workload Man.": "3.758",
+                "Soft Skills": "4.074",
+                "Dec. Making": "4.264",
+                "Observance": "4.699",
+                "Manual Dex.": "3.192"
+            }
+        }
+    ],
+    "maintenanceActivities": {
+        "ACTIVITY_1": {
+            "ACTIVITY_1": [
+                "Mechanical isolation",
+                "Electrical isolation",
+                "System disassembly",
+                "(Preventive) replacement of micro-components",
+                "System reassembly",
+                "General cleaning",
+                "Mechanical reconnection",
+                "Electrical reconnection",
+                "Monitoring of single values 1",
+                "Monitoring of single values 2",
+                "Certification of maintenance activities performed"
+            ]
+        },
+        "ACTIVITY_2": {
+            "ACTIVITY_2": [
+                "Mechanical isolation",
+                "Electrical isolation",
+                "System disassembly",
+                "Precision cleaning",
+                "(Preventive) replacement of micro-components",
+                "Monitoring of single values 1",
+                "Monitoring of single values 2",
+                "Control using technical instrumentation 1",
+                "Control using technical instrumentation 2",
+                "Mechanical reconnection",
+                "Electrical reconnection",
+                "Certification of maintenance activities performed"
+            ]
+        },
+        "ACTIVITY_3": {
+            "ACTIVITY_3": [
+                "Mechanical isolation",
+                "Electrical isolation",
+                "Visual inspection based on the physical component 1",
+                "Interpretation of data trend",
+                "(Preventive) replacement of macro-components",
+                "Mechanical reconnection",
+                "Electrical reconnection",
+                "Test performance",
+                "Certification of maintenance activities performed"
+            ]
+        },
+        "ACTIVITY_4": {
+            "ACTIVITY_4": [
+                "Electrical isolation",
+                "Monitoring of single values 1",
+                "Monitoring of single values 2",
+                "Visual inspection based on the physical component 1",
+                "Control using technical instrumentation 1",
+                "Control using technical instrumentation 2",
+                "Monitoring of single values 3",
+                "Control using technical instrumentation 3",
+                "Visual inspection based on the physical component 2",
+                "Electrical reconnection",
+                "Monitoring of single values 4",
+                "Interpretation of data trend",
+                "Mechanical isolation",
+                "Electrical reconnection",
+                "Control using technical instrumentation 3",
+                "Visual inspection based on the physical component 3",
+                "Control using technical instrumentation 4",
+                "Certification of maintenance activities performed",
+                "Certification of maintenance activities performed 1"
+            ]
+        },
+        "ACTIVITY_5": {
+            "ACTIVITY_5": [
+                "Visual inspection based on the physical component 1",
+                "Electrical isolation",
+                "General cleaning",
+                "Visual inspection based on the physical component 1",
+                "Precision cleaning",
+                "Electrical reconnection",
+                "Control using technical instrumentation 1",
+                "Monitoring of single values 1",
+                "Interpretation of data trend",
+                "Test performance",
+                "Certification of maintenance activities performed"
+            ]
+        },
+        "ACTIVITY_6": {
+            "ACTIVITY_6": [
+                "Mechanical isolation",
+                "Visual inspection based on the physical component 1",
+                "(Preventive) replacement of micro-components",
+                "Precision cleaning",
+                "Control using technical instrumentation 1",
+                "(Preventive) replacement of macro-components",
+                "Visual inspection based on the physical component 2",
+                "System reassembly",
+                "Test performance"
+            ]
+        },
+        "ACTIVITY_7": {
+            "ACTIVITY_7": [
+                "Visual inspection based on the physical component 1",
+                "Visual inspection based on the physical component 2",
+                "Visual inspection based on the physical component 3",
+                "Monitoring of single values 1",
+                "General cleaning",
+                "Visual inspection based on the physical component 4",
+                "(Preventive) replacement of macro-components",
+                "Repair of mechanical failures",
+                "Test performance",
+                "Certification of maintenance activities performed"
+            ]
+        },
+        "ACTIVITY_8": {
+            "ACTIVITY_1": [
+                "Visual inspection based on the physical component 1",
+                "Control using technical instrumentation 1",
+                "Monitoring of single values 1",
+                "Test performance"
+            ],
+            "ACTIVITY_2": [
+                "Visual inspection based on the physical component 1",
+                "Precision cleaning",
+                "Monitoring of single values 1",
+                "(Preventive) replacement of micro-components"
+            ],
+            "ACTIVITY_3": [
+                "Visual inspection based on the physical component 1",
+                "General cleaning",
+                "(Preventive) replacement of micro-components",
+                "Test performance"
+            ],
+            "ACTIVITY_4": [
+                "Visual inspection based on the physical component 1",
+                "Mechanical isolation",
+                "Test performance",
+                "Certification of maintenance activities performed"
+            ]
+        }
+    },
+    "tasks": {
+        "T1": {
+            "F1": 3.313,
+            "F2": 4.5,
+            "F3": 3.75,
+            "F4": 3.813,
+            "F5": 3.375,
+            "F6": 3.125,
+            "F7": 3.813,
+            "F8": 3.5,
+            "F9": 3
+        },
+        "T2": {
+            "F1": 3.625,
+            "F2": 4.25,
+            "F3": 3.5,
+            "F4": 3.375,
+            "F5": 3.188,
+            "F6": 3.125,
+            "F7": 3.813,
+            "F8": 3.5,
+            "F9": 2.875
+        },
+        "T3": {
+            "F1": 3.875,
+            "F2": 4.563,
+            "F3": 3.438,
+            "F4": 3.438,
+            "F5": 3.375,
+            "F6": 3.125,
+            "F7": 3.938,
+            "F8": 3.938,
+            "F9": 3.875
+        },
+        "T3_1": {
+            "F1": 3.875,
+            "F2": 4.563,
+            "F3": 3.438,
+            "F4": 3.438,
+            "F5": 3.375,
+            "F6": 3.125,
+            "F7": 3.938,
+            "F8": 3.938,
+            "F9": 3.875
+        },
+        "T3_2": {
+            "F1": 3.875,
+            "F2": 4.563,
+            "F3": 3.438,
+            "F4": 3.438,
+            "F5": 3.375,
+            "F6": 3.125,
+            "F7": 3.938,
+            "F8": 3.938,
+            "F9": 3.875
+        },
+        "T3_3": {
+            "F1": 3.875,
+            "F2": 4.563,
+            "F3": 3.438,
+            "F4": 3.438,
+            "F5": 3.375,
+            "F6": 3.125,
+            "F7": 3.938,
+            "F8": 3.938,
+            "F9": 3.875
+        },
+        "T4": {
+            "F1": 3.813,
+            "F2": 4.875,
+            "F3": 3.563,
+            "F4": 4.125,
+            "F5": 4.25,
+            "F6": 3.75,
+            "F7": 4.25,
+            "F8": 4.688,
+            "F9": 4.813
+        },
+        "T5": {
+            "F1": 4,
+            "F2": 4.75,
+            "F3": 3.938,
+            "F4": 4.188,
+            "F5": 4.188,
+            "F6": 3.5,
+            "F7": 4.313,
+            "F8": 4.75,
+            "F9": 4.75
+        },
+        "T6": {
+            "F1": 3.375,
+            "F2": 4.5,
+            "F3": 3.938,
+            "F4": 3.5,
+            "F5": 3.625,
+            "F6": 3.125,
+            "F7": 3.813,
+            "F8": 4.25,
+            "F9": 3.75
+        },
+        "T6_1": {
+            "F1": 3.375,
+            "F2": 4.5,
+            "F3": 3.938,
+            "F4": 3.5,
+            "F5": 3.625,
+            "F6": 3.125,
+            "F7": 3.813,
+            "F8": 4.25,
+            "F9": 3.75
+        },
+        "T6_2": {
+            "F1": 3.375,
+            "F2": 4.5,
+            "F3": 3.938,
+            "F4": 3.5,
+            "F5": 3.625,
+            "F6": 3.125,
+            "F7": 3.813,
+            "F8": 4.25,
+            "F9": 3.75
+        },
+        "T6_3": {
+            "F1": 3.375,
+            "F2": 4.5,
+            "F3": 3.938,
+            "F4": 3.5,
+            "F5": 3.625,
+            "F6": 3.125,
+            "F7": 3.813,
+            "F8": 4.25,
+            "F9": 3.75
+        },
+        "T7": {
+            "F1": 3.75,
+            "F2": 4.375,
+            "F3": 3.938,
+            "F4": 3.375,
+            "F5": 3.688,
+            "F6": 3.375,
+            "F7": 3.563,
+            "F8": 3.813,
+            "F9": 3
+        },
+        "T7_1": {
+            "F1": 3.75,
+            "F2": 4.375,
+            "F3": 3.938,
+            "F4": 3.375,
+            "F5": 3.688,
+            "F6": 3.375,
+            "F7": 3.563,
+            "F8": 3.813,
+            "F9": 3
+        },
+        "T7_2": {
+            "F1": 3.75,
+            "F2": 4.375,
+            "F3": 3.938,
+            "F4": 3.375,
+            "F5": 3.688,
+            "F6": 3.375,
+            "F7": 3.563,
+            "F8": 3.813,
+            "F9": 3
+        },
+        "T7_3": {
+            "F1": 3.75,
+            "F2": 4.375,
+            "F3": 3.938,
+            "F4": 3.375,
+            "F5": 3.688,
+            "F6": 3.375,
+            "F7": 3.563,
+            "F8": 3.813,
+            "F9": 3
+        },
+        "T8": {
+            "F1": 3,
+            "F2": 3.875,
+            "F3": 3.125,
+            "F4": 3.438,
+            "F5": 3.938,
+            "F6": 3.313,
+            "F7": 3.313,
+            "F8": 4.25,
+            "F9": 4.5
+        },
+        "T9": {
+            "F1": 3.063,
+            "F2": 3.875,
+            "F3": 2.688,
+            "F4": 3.25,
+            "F5": 3.813,
+            "F6": 3.063,
+            "F7": 3.125,
+            "F8": 4.313,
+            "F9": 4.438
+        },
+        "T10": {
+            "F1": 3.625,
+            "F2": 4.688,
+            "F3": 3.875,
+            "F4": 4.25,
+            "F5": 4.063,
+            "F6": 3.063,
+            "F7": 4,
+            "F8": 4.313,
+            "F9": 4.75
+        },
+        "T11": {
+            "F1": 3.75,
+            "F2": 4.375,
+            "F3": 3.188,
+            "F4": 3.625,
+            "F5": 3.813,
+            "F6": 3.563,
+            "F7": 3.75,
+            "F8": 4.438,
+            "F9": 4.75
+        },
+        "T12": {
+            "F1": 3.625,
+            "F2": 4.438,
+            "F3": 3.5,
+            "F4": 3.563,
+            "F5": 3.875,
+            "F6": 3.438,
+            "F7": 3.875,
+            "F8": 4.563,
+            "F9": 4.625
+        },
+        "T13": {
+            "F1": 4,
+            "F2": 4.625,
+            "F3": 3.438,
+            "F4": 3.688,
+            "F5": 3.938,
+            "F6": 3.125,
+            "F7": 3.688,
+            "F8": 4.375,
+            "F9": 4.688
+        },
+        "T14": {
+            "F1": 3.938,
+            "F2": 4.5,
+            "F3": 3.688,
+            "F4": 4,
+            "F5": 4.188,
+            "F6": 3.313,
+            "F7": 4.313,
+            "F8": 4.688,
+            "F9": 3.375
+        },
+        "T15": {
+            "F1": 3.875,
+            "F2": 4.438,
+            "F3": 3.563,
+            "F4": 3.813,
+            "F5": 3.813,
+            "F6": 3.25,
+            "F7": 3.938,
+            "F8": 4.688,
+            "F9": 4.188
+        },
+        "T16": {
+            "F1": 3.5,
+            "F2": 4.75,
+            "F3": 3.938,
+            "F4": 4.313,
+            "F5": 4.063,
+            "F6": 3.438,
+            "F7": 4.125,
+            "F8": 4.75,
+            "F9": 4.563
+        },
+        "T17": {
+            "F1": 3.813,
+            "F2": 4.5,
+            "F3": 3.5,
+            "F4": 3.75,
+            "F5": 3.875,
+            "F6": 3.313,
+            "F7": 3.813,
+            "F8": 4.563,
+            "F9": 4.438
+        },
+        "T18": {
+            "F1": 3.813,
+            "F2": 4.5,
+            "F3": 3.625,
+            "F4": 4.125,
+            "F5": 3.813,
+            "F6": 3.438,
+            "F7": 3.875,
+            "F8": 4.75,
+            "F9": 4.5
+        },
+        "T19": {
+            "F1": 3.813,
+            "F2": 4.688,
+            "F3": 4,
+            "F4": 3.625,
+            "F5": 4.188,
+            "F6": 3.75,
+            "F7": 3.813,
+            "F8": 4.563,
+            "F9": 3.375
+        },
+        "T20": {
+            "F1": 3.938,
+            "F2": 4.688,
+            "F3": 4.313,
+            "F4": 3.125,
+            "F5": 4.188,
+            "F6": 3.75,
+            "F7": 3.75,
+            "F8": 4.063,
+            "F9": 2.875
+        },
+        "T20_1": {
+            "F1": 3.938,
+            "F2": 4.688,
+            "F3": 4.313,
+            "F4": 3.125,
+            "F5": 4.188,
+            "F6": 3.75,
+            "F7": 3.75,
+            "F8": 4.063,
+            "F9": 2.875
+        }
+    },
+    "features": [
+        "Memory",
+        "Lev. Profes Train",
+        "Lev. Educ.",
+        "Work U. Press.",
+        "Workload Man.",
+        "Soft Skills",
+        "Dec. Making",
+        "Observance",
+        "Manual Dex."
+    ],
+    "taskNameToKey": {
+        "Interpretation of data trend": "T1",
+        "Visual inspection based on image comparison": "T2",
+        "Visual inspection based on the physical component 1": "T3",
+        "Visual inspection based on the physical component 2": "T3_1",
+        "Visual inspection based on the physical component 3": "T3_2",
+        "Visual inspection based on the physical component 4": "T3_3",
+        "Repair of mechanical failures": "T4",
+        "Repair of an electrical fault": "T5",
+        "Control using technical instrumentation 1": "T6",
+        "Control using technical instrumentation 2": "T6_1",
+        "Control using technical instrumentation 3": "T6_2",
+        "Control using technical instrumentation 4": "T6_3",
+        "Monitoring of single values 1": "T7",
+        "Monitoring of single values 2": "T7_1",
+        "Monitoring of single values 3": "T7_2",
+        "Monitoring of single values 4": "T7_3",
+        "Precision cleaning": "T8",
+        "General cleaning": "T9",
+        "(Preventive) replacement of micro-components": "T10",
+        "System disassembly": "T11",
+        "(Preventive) replacement of macro-components": "T12",
+        "System reassembly": "T13",
+        "Lock out/tag out": "T14",
+        "Mechanical isolation": "T15",
+        "Electrical isolation": "T16",
+        "Mechanical reconnection": "T17",
+        "Electrical reconnection": "T18",
+        "Test performance": "T19",
+        "Certification of maintenance activities performed": "T20",
+        "Certification of maintenance activities performed 1": "T20_1"
+    },
+    "featureMapping": {
+        "F1": "Memory",
+        "F2": "Lev. Profes Train",
+        "F3": "Lev. Educ.",
+        "F4": "Work U. Press.",
+        "F5": "Workload Man.",
+        "F6": "Soft Skills",
+        "F7": "Dec. Making",
+        "F8": "Observance",
+        "F9": "Manual Dex."
+    },
+    "TASK_DEFINITIONS": {
+        "T1": "Interpretation of data trend",
+        "T2": "Visual inspection based on image comparison",
+        "T3": "Visual inspection based on the physical component 1",
+        "T3_1": "Visual inspection based on the physical component 2",
+        "T3_2": "Visual inspection based on the physical component 3",
+        "T3_3": "Visual inspection based on the physical component 4",
+        "T4": "Repair of mechanical failures",
+        "T5": "Repair of an electrical fault",
+        "T6": "Control using technical instrumentation 1",
+        "T6_1": "Control using technical instrumentation 2",
+        "T6_2": "Control using technical instrumentation 3",
+        "T6_3": "Control using technical instrumentation 4",
+        "T7": "Monitoring of single values 1",
+        "T7_1": "Monitoring of single values 2",
+        "T7_2": "Monitoring of single values 3",
+        "T7_3": "Monitoring of single values 4",
+        "T8": "Precision cleaning",
+        "T9": "General cleaning",
+        "T10": "(Preventive) replacement of micro-components",
+        "T11": "System disassembly",
+        "T12": "(Preventive) replacement of macro-components",
+        "T13": "System reassembly",
+        "T14": "Lock out/tag out",
+        "T15": "Mechanical isolation",
+        "T16": "Electrical isolation",
+        "T17": "Mechanical reconnection",
+        "T18": "Electrical reconnection",
+        "T19": "Test performance",
+        "T20": "Certification of maintenance activities performed",
+        "T20_1": "Certification of maintenance activities performed 1"
+    },
+    "FEATURE_DEFINITIONS": {
+        "F1": "Memory",
+        "F2": "Lev. Profes Train",
+        "F3": "Lev. Educ.",
+        "F4": "Work U. Press.",
+        "F5": "Workload Man.",
+        "F6": "Soft Skills",
+        "F7": "Dec. Making",
+        "F8": "Observance",
+        "F9": "Manual Dex."
+    },
+    "ACTIVITY_DEFINITIONS": {
+        "ACTIVITY_1": "PREVENTIVE MAINTENANCE OF THE REVERSE OSMOSIS WATER PURIFICATION SYSTEM",
+        "ACTIVITY_2": "INSPECTION AND MAINTENANCE OF THE GLYCOL COOLING SYSTEM",
+        "ACTIVITY_3": "BREAKDOWN MAINTENANCE OF THE CENTIFUGAL PUMP",
+        "ACTIVITY_4": "AUTONOMOUS MAINTENANCE IN ASSELA MALT FACTORY",
+        "ACTIVITY_5": "GENERAL MAINTENANCE OF MOTORS",
+        "ACTIVITY_6": "MAINTENANCE ROUTINE TO CHECK LEAK IN VACUUM CHAMBER",
+        "ACTIVITY_7": "GENERAL MAINTENANCE OF STEAM TRAPS",
+        "ACTIVITY_8": "COMPRESSOR MAINTENANCE"
+    }
+}
