@@ -10,23 +10,37 @@ const ACTIVITY_DEFINITIONS = {
   ACTIVITY_8: "COMPRESSOR MAINTENANCE",
 };
 
+const ACTIVITY_TACOM = {
+  ACTIVITY_1: "VERY LOW",
+  ACTIVITY_2: "HIGH",
+  ACTIVITY_3: "LOW",
+  ACTIVITY_4: "VERY HIGH",
+  ACTIVITY_5: "HIGH",
+  ACTIVITY_6: "MEDIUM",
+  ACTIVITY_7: "MEDIUM",
+  ACTIVITY_8: "NOT DEFINED",
+};
+
 const TASK_DEFINITIONS = {
   T1: "Interpretation of data trend",
   T2: "Visual inspection based on image comparison",
-  T3: "Visual inspection based on the physical component 1",
-  T3_1: "Visual inspection based on the physical component 2",
-  T3_2: "Visual inspection based on the physical component 3",
-  T3_3: "Visual inspection based on the physical component 4",
+  T3: "Visual inspection based on the physical component",
+  T3_1: "Visual inspection based on the physical component 1",
+  T3_2: "Visual inspection based on the physical component 2",
+  T3_3: "Visual inspection based on the physical component 3",
+  T3_4: "Visual inspection based on the physical component 4",
   T4: "Repair of mechanical failures",
   T5: "Repair of an electrical fault",
-  T6: "Control using technical instrumentation 1",
-  T6_1: "Control using technical instrumentation 2",
-  T6_2: "Control using technical instrumentation 3",
-  T6_3: "Control using technical instrumentation 4",
-  T7: "Monitoring of single values 1",
-  T7_1: "Monitoring of single values 2",
-  T7_2: "Monitoring of single values 3",
-  T7_3: "Monitoring of single values 4",
+  T6: "Control using technical instrumentation",
+  T6_1: "Control using technical instrumentation 1",
+  T6_2: "Control using technical instrumentation 2",
+  T6_3: "Control using technical instrumentation 3",
+  T6_4: "Control using technical instrumentation 4",
+  T7: "Monitoring of single values",
+  T7_1: "Monitoring of single values 1",
+  T7_2: "Monitoring of single values 2",
+  T7_3: "Monitoring of single values 3",
+  T7_4: "Monitoring of single values 4",
   T8: "Precision cleaning",
   T9: "General cleaning",
   T10: "(Preventive) replacement of micro-components",
@@ -39,8 +53,9 @@ const TASK_DEFINITIONS = {
   T17: "Mechanical reconnection",
   T18: "Electrical reconnection",
   T19: "Test performance",
-  T20: "Certification of maintenance activities performed",
-  T20_1: "Certification of maintenance activities performed 1"
+  T20: "Certification of maintenance activities performed 1",
+  T20_1: "Certification of maintenance activities performed 1",
+  T20_2: "Certification of maintenance activities performed 2"
 };
 
 // Definizione delle costanti feature e loro nomi
@@ -148,6 +163,17 @@ const tasks = {
     F8: 3.938,
     F9: 3.875,
   },
+  T3_4: {
+    F1: 3.875,
+    F2: 4.563,
+    F3: 3.438,
+    F4: 3.438,
+    F5: 3.375,
+    F6: 3.125,
+    F7: 3.938,
+    F8: 3.938,
+    F9: 3.875,
+  },
   T4: {
     F1: 3.813,
     F2: 4.875,
@@ -214,6 +240,17 @@ const tasks = {
     F8: 4.25,
     F9: 3.75,
   },
+  T6_4: {
+    F1: 3.375,
+    F2: 4.5,
+    F3: 3.938,
+    F4: 3.5,
+    F5: 3.625,
+    F6: 3.125,
+    F7: 3.813,
+    F8: 4.25,
+    F9: 3.75,
+  },
   T7: {
     F1: 3.75,
     F2: 4.375,
@@ -248,6 +285,17 @@ const tasks = {
     F9: 3.0,
   },
   T7_3: {
+    F1: 3.75,
+    F2: 4.375,
+    F3: 3.938,
+    F4: 3.375,
+    F5: 3.688,
+    F6: 3.375,
+    F7: 3.563,
+    F8: 3.813,
+    F9: 3.0,
+  },
+  T7_4: {
     F1: 3.75,
     F2: 4.375,
     F3: 3.938,
@@ -411,17 +459,28 @@ const tasks = {
     F7: 3.75,
     F8: 4.063,
     F9: 2.875,
+  },
+  T20_2: {
+    F1: 3.938,
+    F2: 4.688,
+    F3: 4.313,
+    F4: 3.125,
+    F5: 4.188,
+    F6: 3.75,
+    F7: 3.75,
+    F8: 4.063,
+    F9: 2.875,
   }
 };
 
 // Definizione delle attività di manutenzione
 const maintenanceActivities = {
   ACTIVITY_1: {
-    ACTIVITY_1: [T15, T16, T11, T10, T13, T9, T17, T18, T7, T7_1, T20] 
+    ACTIVITY_1: [T15, T16, T11, T10, T13, T9, T17, T18, T7_1, T7_2, T20] 
   },
 
   ACTIVITY_2: {
-    ACTIVITY_2: [T15, T16, T11, T8, T10, T7, T7_1, T6, T6_1, T17, T18, T20]
+    ACTIVITY_2: [T15, T16, T11, T8, T10, T7_1, T7_2, T6_1, T6_2, T17, T18, T20]
   },
   
   ACTIVITY_3: { 
@@ -429,7 +488,7 @@ const maintenanceActivities = {
   },
 
   ACTIVITY_4: {
-    ACTIVITY_4: [T16, T7, T7_1, T3, T6, T6_1, T7_2, T6_2, T3_1, T18, T7_3, T1, T15, T18, T6_2, T3_2, T6_3, T20, T20_1],
+    ACTIVITY_4: [T16, T7_1, T7_2, T3_1, T6_1, T6_2, T7_3, T6_3, T3_2, T18, T7_3, T1, T15, T18, T6_3, T3_3, T6_4, T20_1, T20_2],
   },
 
   ACTIVITY_5: {
@@ -439,7 +498,7 @@ const maintenanceActivities = {
     ACTIVITY_6: [T15, T3, T10, T8, T6, T12, T3_1, T13, T19,],
   },
   ACTIVITY_7: {
-    ACTIVITY_7: [T3, T3_1, T3_2, T7, T9, T3_3, T12, T4, T19, T20],
+    ACTIVITY_7: [T3_1, T3_2, T3_3, T7, T9, T3_4, T12, T4, T19, T20],
   },
 
   ACTIVITY_8: {
@@ -591,6 +650,7 @@ module.exports = {
   // Aggiungiamo anche le definizioni originali se servono
   TASK_DEFINITIONS,
   FEATURE_DEFINITIONS,
-  ACTIVITY_DEFINITIONS
+  ACTIVITY_DEFINITIONS,
+  ACTIVITY_TACOM
 };
 

@@ -6,7 +6,36 @@ import apiUrl from '../config';
 
 const { Panel } = StyledCollapse;
 
-const ActivityList = ({ title, activities, onActivityChange, tasks, taskNameToKey, onTaskFeatureChange, updateAllTaskFeatures, allTaskFeatures, featureMapping, activityTitle, config }) => {
+// Add this object for TACOM styling
+const tacomStyles = {
+  'VERY LOW': {
+    backgroundColor: '#4CAF50', // green
+    color: 'white'
+  },
+  'LOW': {
+    backgroundColor: '#8BC34A', // light green
+    color: 'black'
+  },
+  'MEDIUM': {
+    backgroundColor: '#FFEB3B', // yellow
+    color: 'black'
+  },
+  'HIGH': {
+    backgroundColor: '#FF9800', // orange
+    color: 'black'
+  },
+  'VERY HIGH': {
+    backgroundColor: '#F44336', // red
+    color: 'white'
+  },
+  'NOT DEFINED': {
+    backgroundColor: '#9E9E9E', // grey
+    color: 'black'
+  }
+};
+
+
+const ActivityList = ({ title, activities, onActivityChange, tasks, taskNameToKey, onTaskFeatureChange, updateAllTaskFeatures, allTaskFeatures, featureMapping, activityTitle, config, user, setConfig }) => {
   const [selectAll, setSelectAll] = useState(false);
 
   const handleTaskChange = (activityName, task, isChecked) => {
@@ -33,6 +62,11 @@ const ActivityList = ({ title, activities, onActivityChange, tasks, taskNameToKe
 
 
   const handleSaveTask = async (taskKey, updatedFeatures) => {
+    // Se l'utente è autenticato, non dovremmo usare questa funzione
+    if (user) {
+      return;
+    }
+
     try {
         const response = await fetch(`${apiUrl}/modifyTaskFeatures`, {
             method: 'PUT',
@@ -51,7 +85,6 @@ const ActivityList = ({ title, activities, onActivityChange, tasks, taskNameToKe
             throw new Error(data.error || 'Failed to update task features');
         }
 
-        // Show success notification
         notification.success({
             message: 'Task Features Updated',
             description: data.featuresMessage,
@@ -60,7 +93,6 @@ const ActivityList = ({ title, activities, onActivityChange, tasks, taskNameToKe
         });
 
     } catch (error) {
-        // Show error notification
         notification.error({
             message: 'Update Failed',
             description: error.message || 'Failed to update task features',
@@ -70,28 +102,43 @@ const ActivityList = ({ title, activities, onActivityChange, tasks, taskNameToKe
     }
   };
   const subActivityTitle = config?.ACTIVITY_DEFINITIONS[title] || title;
+  const tacomValue = config?.ACTIVITY_TACOM[title] || 'NOT DEFINED';
+  const tacomStyle = tacomStyles[tacomValue] || tacomStyles['NOT DEFINED'];
+
   return (
     <StyledCard
       title={
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Tooltip title={subActivityTitle}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Tooltip title={subActivityTitle}>
+              <span
+                style={{
+                  display: "inline-block",
+                  maxWidth: "600px",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {`${subActivityTitle}`}
+                </span>
+            </Tooltip>
             <span
               style={{
-                display: "inline-block",
-                maxWidth: "500px",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
+                padding: '2px 8px',
+                borderRadius: '4px',
+                fontSize: '0.9em',
+                ...tacomStyle
               }}
             >
-              {`${subActivityTitle}`}
-              </span>
-          </Tooltip>
-          <Checkbox
-            checked={selectAll}
-            onChange={handleSelectAll}
-          >
-            Select All
-          </Checkbox>
+              {tacomValue}
+            </span>
+            <Checkbox
+              checked={selectAll}
+              onChange={handleSelectAll}
+              >
+              Select All
+           </Checkbox>
+          </div>
         </div>
       }
       bordered={true}
@@ -100,7 +147,7 @@ const ActivityList = ({ title, activities, onActivityChange, tasks, taskNameToKe
         <Panel header="Tasks Associated" key="1">
           <Activity
             activity={{
-              name:  title,  // Usiamo il codice della sotto attività
+              name: title,
               tasks: activities,
             }}
             onTaskChange={handleTaskChange}
@@ -110,8 +157,11 @@ const ActivityList = ({ title, activities, onActivityChange, tasks, taskNameToKe
             allTaskFeatures={allTaskFeatures}
             taskNameToKey={taskNameToKey}
             featureMapping={featureMapping}
-            onSaveTask={handleSaveTask}
+            onSaveTask={user ? null : handleSaveTask}
             selectAll={selectAll}
+            user={user}
+            setConfig={setConfig}
+            config={config}
           />
         </Panel>
       </StyledCollapse>

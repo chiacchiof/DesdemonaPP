@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Collapse, Checkbox, Tooltip, Button, Slider, Modal, notification } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import apiUrl from '../config';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 const { Panel } = Collapse;
 
-const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
+const Operators = ({ onOperatorsChange, operators: initialOperators, user, setConfig }) => {
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedOperator, setSelectedOperator] = useState(null);
     const [localFeatures, setLocalFeatures] = useState({});
@@ -44,27 +46,68 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
                     newValue: parseFloat(newValue)
                 }));
 
-                const response = await fetch(`${apiUrl}/modifyOperatorFeatures/bulk`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        operatorName: selectedOperator.name,
-                        features: featureUpdates
-                    })
-                });
+                let updatedOperator;
 
-                const data = await response.json();
+                if (user) {
+                    // Se l'utente è autenticato, aggiorna su Firebase
+                    const docRef = doc(db, 'userConfigs', user.uid);
+                    const docSnap = await getDoc(docRef);
+                    
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        const currentConfig = userData.config;
+                        
+                        // Aggiorna l'operatore nella configurazione
+                        const updatedOperators = currentConfig.operators.map(op => {
+                            if (op.name === selectedOperator.name) {
+                                return {
+                                    ...op,
+                                    features: localFeatures
+                                };
+                            }
+                            return op;
+                        });
+                        
+                        // Aggiorna la configurazione completa
+                        const newConfig = {
+                            ...currentConfig,
+                            operators: updatedOperators
+                        };
+                        
+                        // Salva su Firebase
+                        await updateDoc(docRef, {
+                            config: newConfig,
+                            updatedAt: new Date().toISOString()
+                        });
 
-                if (!data.success) {
-                    throw new Error(data.error || 'Failed to update operator features');
+                        // Aggiorna lo stato locale
+                        setConfig(newConfig);
+                        updatedOperator = {
+                            ...selectedOperator,
+                            features: localFeatures
+                        };
+                    }
+                } else {
+                    // Se l'utente non è autenticato, usa l'API del server
+                    const response = await fetch(`${apiUrl}/modifyOperatorFeatures/bulk`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            operatorName: selectedOperator.name,
+                            features: featureUpdates
+                        })
+                    });
+
+                    const data = await response.json();
+                    if (!data.success) {
+                        throw new Error(data.error || 'Failed to update operator features');
+                    }
+                    updatedOperator = data.updatedOperator;
                 }
 
-                // Update local state with the returned operator data
-                const updatedOperator = data.updatedOperator;
-
-                // Update all operators
+                // Aggiorna gli stati locali
                 const updatedOperators = operators.map((operator) => {
                     if (operator.name === selectedOperator.name) {
                         return updatedOperator;
@@ -73,7 +116,6 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
                 });
                 setOperators(updatedOperators);
 
-                // Update selected operators
                 const updatedSelectedOperators = selectedOperators.map((operator) => {
                     if (operator.name === selectedOperator.name) {
                         return updatedOperator;
@@ -82,16 +124,16 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
                 });
                 setSelectedOperators(updatedSelectedOperators);
 
-                // Show success notification
                 notification.success({
                     message: 'Features Updated Successfully',
-                    description: data.featuresMessage,
+                    description: user ? 
+                        'Operator features updated in your configuration' : 
+                        'Operator features updated in server configuration',
                     placement: 'topRight',
                     duration: 3
                 });
 
             } catch (error) {
-                // Show error notification
                 notification.error({
                     message: 'Update Failed',
                     description: error.message || 'Failed to update operator features',

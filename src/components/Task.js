@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Tooltip, Checkbox, Modal, Slider, Button } from 'antd';
+import { Row, Col, Tooltip, Checkbox, Modal, Slider, Button, notification } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase/config';
+import apiUrl from '../config';
 
-const Task = ({ task, onTaskChange, onTaskFeatureChange, updateAllTaskFeatures, allTaskFeatures, featureMapping, onSaveTask, taskKey, selectAll }) => {
+const Task = ({ task, onTaskChange, onTaskFeatureChange, updateAllTaskFeatures, allTaskFeatures, featureMapping, onSaveTask, taskKey, selectAll, user, setConfig, config }) => {
+  console.log('Task component detailed props:', {
+    task: task,
+    user: user,
+    onSaveTask: onSaveTask,
+    taskKey: taskKey,
+    config: config?.maintenanceActivities ? 'config present' : 'config missing',
+    featureMapping: featureMapping,
+    allTaskFeatures: allTaskFeatures
+  });
+
   const [popupVisible, setPopupVisible] = useState(false);
   const [taskFeatures, setTaskFeatures] = useState(task.features);
   const [originalTaskFeatures, setOriginalTaskFeatures] = useState(task.features);
@@ -37,23 +50,112 @@ const Task = ({ task, onTaskChange, onTaskFeatureChange, updateAllTaskFeatures, 
     setPopupVisible(false);
   };
 
-  const saveChanges = () => {
-    // Update task features and selected options
-    Object.keys(taskFeatures).forEach(feature => {
-      onTaskFeatureChange(task.name, feature, taskFeatures[feature]);
-    });
+  const saveChanges = async () => {
+    try {
+      console.log('SaveChanges started');
+      console.log('User:', user);
+      console.log('Task:', task);
+      console.log('TaskKey:', taskKey);
+      console.log('TaskFeatures:', taskFeatures);
+      
+      if (user) {
+        console.log('Entering Firebase update path');
+        const docRef = doc(db, 'userConfigs', user.uid);
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          console.log('Firebase doc exists, updating...');
+          const userData = docSnap.data();
+          const currentConfig = userData.config;
+          
+          console.log('Config structure:', currentConfig);
 
-    // Update the selected options based on checkbox state
-    const newSelectedOption = isChecked ? taskFeatures : '';
-    setSelectedOptions(newSelectedOption);
+          let updatedConfig = {...currentConfig};
+          let taskUpdated = false;
 
-    // Update all task features without changing the checkbox status
-    updateAllTaskFeatures(task.field, task.name, newSelectedOption);
+          // Verifica se il task esiste direttamente in tasks
+          if (currentConfig.tasks[taskKey]) {
+            console.log('Found task in tasks collection:', taskKey);
+            updatedConfig.tasks[taskKey] = {
+              ...currentConfig.tasks[taskKey],
+              ...taskFeatures  // Spread diretto delle features invece di metterle in un oggetto features
+            };
+            taskUpdated = true;
+          }
 
-    // Call the onSaveTask function to update the server
-    onSaveTask(taskKey, taskFeatures);
+          if (!taskUpdated) {
+            console.error('Task search details:', {
+              searchedName: task.name,
+              searchedKey: taskKey,
+              availableTaskKeys: Object.keys(currentConfig.tasks)
+            });
+            throw new Error(`Task "${task.name}" (key: ${taskKey}) not found in configuration`);
+          }
 
-    setPopupVisible(false);
+          try {
+            // Salva su Firebase
+            await updateDoc(docRef, {
+              config: updatedConfig,
+              updatedAt: new Date().toISOString()
+            });
+            console.log('Firebase update successful');
+
+            // Aggiorna lo stato locale
+            setConfig(updatedConfig);
+
+            notification.success({
+              message: 'Features Updated Successfully',
+              description: 'Task features updated in your configuration',
+              placement: 'topRight',
+              duration: 3
+            });
+          } catch (updateError) {
+            console.error('Firebase update error:', updateError);
+            throw new Error(`Failed to update Firebase: ${updateError.message}`);
+          }
+        } else {
+          console.error('Firebase doc does not exist');
+          throw new Error('User configuration not found in Firebase');
+        }
+      } else if (typeof onSaveTask === 'function') {
+        console.log('Entering server API path');
+        await onSaveTask(taskKey, taskFeatures);
+      } else {
+        console.log('No valid save path found!');
+        console.log('User status:', !!user);
+        console.log('onSaveTask available:', typeof onSaveTask);
+        throw new Error('No valid save method available');
+      }
+
+      // Update task features and selected options
+      Object.keys(taskFeatures).forEach(feature => {
+        onTaskFeatureChange(task.name, feature, taskFeatures[feature]);
+      });
+
+      // Update the selected options based on checkbox state
+      const newSelectedOption = isChecked ? taskFeatures : '';
+      setSelectedOptions(newSelectedOption);
+
+      // Update all task features without changing the checkbox status
+      updateAllTaskFeatures(task.field, task.name, newSelectedOption);
+
+      setPopupVisible(false);
+
+    } catch (error) {
+      console.error('SaveChanges error:', error);
+      console.error('Error details:', {
+        errorName: error.name,
+        errorMessage: error.message,
+        errorStack: error.stack
+      });
+      notification.error({
+        message: 'Update Failed',
+        description: error.message || 'Failed to update task features',
+        placement: 'topRight',
+        duration: 4
+      });
+      return;
+    }
   };
 
 // Gestiamo il Select All separatamente

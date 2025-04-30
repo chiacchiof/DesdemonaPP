@@ -11,8 +11,10 @@ const Activity = ({
     tasks, 
     featureMapping,
     onSaveTask,
-    selectAll  // Aggiungi questo prop
-
+    selectAll,
+    user,
+    setConfig,
+    config
 }) => {
     if (!activity || !Array.isArray(activity.tasks)) {
         return null;
@@ -34,7 +36,10 @@ const Activity = ({
                         featureMapping={featureMapping}
                         onSaveTask={onSaveTask}
                         taskKey={taskKey}
-                        selectAll={selectAll}  // Passa il prop al Task
+                        selectAll={selectAll}
+                        user={user}
+                        setConfig={setConfig}
+                        config={config}
                     />
                 );
             })}
