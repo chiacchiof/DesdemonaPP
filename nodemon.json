@@ -1,5 +1,6 @@
 {
     "watch": ["server", "src"],
     "ext": "js,json",
-    "exec": "node server/server.js"
+    "exec": "node server/server.js",
+    "ignore": ["server/data/*"]
 }

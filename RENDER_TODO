@@ -1,0 +1,3 @@
+impostare il comando 
+Build Command:
+mv /opt/render/project/src/package.render.json /opt/render/project/src/package.json && npm install

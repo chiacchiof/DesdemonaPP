@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Collapse, Checkbox, Tooltip, Button, Slider, Modal } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
-// Rimuovi l'importazione locale di config
-// import { operators as initialOperators } from '../config';
+import { Card, Row, Col, Collapse, Checkbox, Tooltip, Button, Slider, Modal, notification } from 'antd';
+import { EditOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import apiUrl from '../config';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase/config';
+import AddOperatorModal from './AddOperatorModal';
 
 const { Panel } = Collapse;
 
-const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
+const Operators = ({ onOperatorsChange, operators: initialOperators, user, setConfig }) => {
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedOperator, setSelectedOperator] = useState(null);
     const [localFeatures, setLocalFeatures] = useState({});
     const [operators, setOperators] = useState(initialOperators); // Usa il prop passato
     const [selectedOperators, setSelectedOperators] = useState([]);
+    const [isUpdating, setIsUpdating] = useState(false);
+    const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+    const { confirm } = Modal;
 
     useEffect(() => {
         onOperatorsChange(selectedOperators); // Notify parent component
@@ -35,38 +40,114 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
         }));
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (selectedOperator) {
-            const updatedOperators = operators.map((operator) => {
-                if (operator.name === selectedOperator.name) {
-                    return {
-                        ...operator,
-                        features: localFeatures,
-                    };
-                }
-                return operator;
-            });
-            setOperators(updatedOperators);
+            setIsUpdating(true);
+            try {
+                const featureUpdates = Object.entries(localFeatures).map(([featureName, newValue]) => ({
+                    featureName,
+                    newValue: parseFloat(newValue)
+                }));
 
-            // Update the selected operators with the updated features
-            const updatedSelectedOperators = selectedOperators.map((operator) => {
-                if (operator.name === selectedOperator.name) {
-                    return {
-                        ...operator,
-                        features: localFeatures,
-                    };
-                }
-                return operator;
-            });
-            setSelectedOperators(updatedSelectedOperators);
+                let updatedOperator;
 
-            // Recalculate selectedOperator with updated features
-            setSelectedOperator((prevOperator) => ({
-                ...prevOperator,
-                features: localFeatures,
-            }));
+                if (user) {
+                    // Se l'utente è autenticato, aggiorna su Firebase
+                    const docRef = doc(db, 'userConfigs', user.uid);
+                    const docSnap = await getDoc(docRef);
+                    
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        const currentConfig = userData.config;
+                        
+                        // Aggiorna l'operatore nella configurazione
+                        const updatedOperators = currentConfig.operators.map(op => {
+                            if (op.name === selectedOperator.name) {
+                                return {
+                                    ...op,
+                                    features: localFeatures
+                                };
+                            }
+                            return op;
+                        });
+                        
+                        // Aggiorna la configurazione completa
+                        const newConfig = {
+                            ...currentConfig,
+                            operators: updatedOperators
+                        };
+                        
+                        // Salva su Firebase
+                        await updateDoc(docRef, {
+                            config: newConfig,
+                            updatedAt: new Date().toISOString()
+                        });
+
+                        // Aggiorna lo stato locale
+                        setConfig(newConfig);
+                        updatedOperator = {
+                            ...selectedOperator,
+                            features: localFeatures
+                        };
+                    }
+                } else {
+                    // Se l'utente non è autenticato, usa l'API del server
+                    const response = await fetch(`${apiUrl}/modifyOperatorFeatures/bulk`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            operatorName: selectedOperator.name,
+                            features: featureUpdates
+                        })
+                    });
+
+                    const data = await response.json();
+                    if (!data.success) {
+                        throw new Error(data.error || 'Failed to update operator features');
+                    }
+                    updatedOperator = data.updatedOperator;
+                }
+
+                // Aggiorna gli stati locali
+                const updatedOperators = operators.map((operator) => {
+                    if (operator.name === selectedOperator.name) {
+                        return updatedOperator;
+                    }
+                    return operator;
+                });
+                setOperators(updatedOperators);
+
+                const updatedSelectedOperators = selectedOperators.map((operator) => {
+                    if (operator.name === selectedOperator.name) {
+                        return updatedOperator;
+                    }
+                    return operator;
+                });
+                setSelectedOperators(updatedSelectedOperators);
+
+                notification.success({
+                    message: 'Features Updated Successfully',
+                    description: user ? 
+                        'Operator features updated in your configuration' : 
+                        'Operator features updated in server configuration',
+                    placement: 'topRight',
+                    duration: 3
+                });
+
+            } catch (error) {
+                notification.error({
+                    message: 'Update Failed',
+                    description: error.message || 'Failed to update operator features',
+                    placement: 'topRight',
+                    duration: 4
+                });
+            } finally {
+                setIsUpdating(false);
+                setPopupVisible(false);
+            }
         }
-        setPopupVisible(false);
     };
 
     const handleSelectAllChange = (e) => {
@@ -96,18 +177,136 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
         event.stopPropagation();
     };
 
+    const handleAddOperator = async (newOperator) => {
+        try {
+            if (user) {
+                // Se l'utente è autenticato, la logica è già gestita in AddOperatorModal
+                // Aggiorniamo solo lo stato locale
+                setOperators(prev => [...prev, newOperator]);
+                setIsAddModalVisible(false);
+            } else {
+                // Per utenti non autenticati, aggiorniamo lo stato locale dopo che l'API ha avuto successo
+                setOperators(prev => [...prev, newOperator]);
+                setIsAddModalVisible(false);
+            }
+        } catch (error) {
+            notification.error({
+                message: 'Error',
+                description: error.message || 'Failed to add operator',
+                placement: 'topRight',
+                duration: 4
+            });
+        }
+    };
+
+    const showDeleteConfirm = (operator) => {
+        confirm({
+            title: `Are you sure you want to delete ${operator.name}?`,
+            icon: <ExclamationCircleOutlined />,
+            content: 'This action cannot be undone.',
+            okText: 'Yes, delete',
+            okType: 'danger',
+            cancelText: 'No',
+            onOk() {
+                return handleDeleteOperator(operator);
+            },
+        });
+    };
+
+    const handleDeleteOperator = async (operator) => {
+        try {
+            if (user) {
+                // Utente loggato: Usa Firebase direttamente
+                const userDocRef = doc(db, 'userConfigs', user.uid);
+                const userDocSnap = await getDoc(userDocRef);
+                
+                if (userDocSnap.exists()) {
+                    const userData = userDocSnap.data();
+                    
+                    // Filtra l'operatore da eliminare
+                    const updatedOperators = userData.config.operators.filter(
+                        op => op.name !== operator.name
+                    );
+                    
+                    // Aggiorna la configurazione
+                    const updatedConfig = {
+                        ...userData.config,
+                        operators: updatedOperators
+                    };
+                    
+                    // Salva su Firebase
+                    await updateDoc(userDocRef, {
+                        config: updatedConfig,
+                        updatedAt: new Date().toISOString()
+                    });
+                    
+                    // Aggiorna lo stato locale
+                    setOperators(updatedOperators);
+                    
+                    notification.success({
+                        message: 'Operator Deleted',
+                        description: `Operator "${operator.name}" has been removed from your configuration.`
+                    });
+                }
+            } else {
+                // Utente non loggato: Usa l'API
+                const response = await fetch(`${apiUrl}/deleteOperator`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ operatorName: operator.name })
+                });
+                
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to delete operator');
+                }
+                
+                // Aggiorna lo stato locale
+                setOperators(operators.filter(op => op.name !== operator.name));
+                
+                notification.success({
+                    message: 'Operator Deleted',
+                    description: data.message || `Operator "${operator.name}" has been deleted successfully.`
+                });
+            }
+        } catch (error) {
+            console.error('Error deleting operator:', error);
+            notification.error({
+                message: 'Failed to Delete',
+                description: error.message || 'An error occurred while deleting the operator.'
+            });
+        }
+    };
+
     return (
         <>
             <Collapse defaultActiveKey={['1']} style={{ marginBottom: '20px' }}>
                 <Panel
                     header={
                         <div onClick={handlePanelClick}>
-                            <Checkbox
-                                onChange={handleSelectAllChange}
-                                checked={selectedOperators.length === operators.length}
-                            >
-                                Select All Operators
-                            </Checkbox>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                <Checkbox
+                                    onChange={handleSelectAllChange}
+                                    checked={selectedOperators.length === operators.length}
+                                >
+                                    Select All Operators
+                                </Checkbox>
+                                <Tooltip title="Add new operator">
+                                    <Button 
+                                        type="primary" 
+                                        shape="circle" 
+                                        icon={<PlusOutlined />} 
+                                        size="small" 
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setIsAddModalVisible(true);
+                                        }}
+                                    />
+                                </Tooltip>
+                            </div>
                         </div>
                     }
                     key="1"
@@ -160,15 +359,39 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
                                                     Avg: {calculateAverage(operator.features)}
                                                 </span>
                                             </div>
-                                            <EditOutlined
-                                                onClick={() => handleCardClick(operator)}
-                                                style={{ 
-                                                    position: 'absolute', 
-                                                    top: '10px', 
-                                                    right: '10px', 
-                                                    fontSize: '16px' 
-                                                }}
-                                            />
+                                            <Tooltip title="Edit Features">
+                                                <Button 
+                                                    icon={<EditOutlined />} 
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleCardClick(operator);
+                                                    }}
+                                                    size="small"
+                                                    type="text"
+                                                    style={{ 
+                                                        position: 'absolute', 
+                                                        top: '10px', 
+                                                        right: '10px',
+                                                    }}
+                                                />
+                                            </Tooltip>
+                                            <Tooltip title="Delete Operator">
+                                                <Button 
+                                                    icon={<DeleteOutlined />} 
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        showDeleteConfirm(operator);
+                                                    }}
+                                                    size="small"
+                                                    type="text"
+                                                    style={{ 
+                                                        position: 'absolute', 
+                                                        top: '10px', 
+                                                        right: '40px',
+                                                        color: '#ff4d4f' // Solo l'icona sarà rossa, non il bordo
+                                                    }}
+                                                />
+                                            </Tooltip>
                                         </div>
                                     </Card>
                                 </Tooltip>
@@ -183,10 +406,15 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
                     maskClosable={false}  // Prevent closing the modal by clicking outside of it
                     onCancel={handleClosePopup}
                     footer={[
-                        <Button key="cancel" onClick={handleClosePopup}>
+                        <Button key="cancel" onClick={handleClosePopup} disabled={isUpdating}>
                             Cancel
                         </Button>,
-                        <Button key="save" type="primary" onClick={handleSave}>
+                        <Button 
+                            key="save" 
+                            type="primary" 
+                            onClick={handleSave}
+                            loading={isUpdating}
+                        >
                             Save
                         </Button>,
                     ]}
@@ -201,16 +429,23 @@ const Operators = ({ onOperatorsChange, operators: initialOperators }) => {
                             <Col span={8}>
                                 <Slider
                                     min={0}
-                                    max={10}
-                                    step={0.05}
+                                    max={5}
+                                    step={0.005}
                                     value={parseFloat(localFeatures[feature])}
-                                    onChange={(value) => handleFeatureChange(feature, value.toFixed(2))}
+                                    onChange={(value) => handleFeatureChange(feature, value.toFixed(3))}
                                 />
                             </Col>
                         </Row>
                     ))}
                 </Modal>
             )}
+            <AddOperatorModal 
+                visible={isAddModalVisible}
+                onCancel={() => setIsAddModalVisible(false)}
+                onSave={handleAddOperator}
+                features={operators[0]?.features ? Object.keys(operators[0].features) : []}
+                user={user}
+            />
         </>
     );
 };
