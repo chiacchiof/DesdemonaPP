@@ -1,0 +1,6 @@
+1) Aggiungi Operatore / Rimuovi Operatore /  DONE
+2) Aggiungi/Rimuovi Routine di manutenzione /  DONE
+3) Aggiungi complessità TACOM della Routine (Molto basso, basso, ..) /DONE
+4) Aggiungi/Rimuovi Task dalla Routine di Manutenzione /DONE
+5) Eliminare la modifica dei valori delle features dei task e renderli indipendenti (da vedere)
+6) Operatore: Attributo TACOM attività con memoria (escludo dal nuovo run Alto e Molto Alto)

@@ -1,5 +1,5 @@
 const { maintenanceActivities, operators } = require('../config');
-const MyClass = require('./MyClass');
+const DesBrain = require('./DesBrain');
 
 class Simulation {
     constructor(numMaintenanceActivities, numActivities, numTasks, numOperators) {
@@ -89,7 +89,7 @@ class Simulation {
 
             //console.log(`4. Method: runSimulation ---> Checked activities for ${maintenanceActivity}:`, checkedActivities);
 
-            const optimalResult = MyClass.evaluateScenario('', checkedActivities, selectedOperators);
+            const optimalResult = DesBrain.evaluateScenario('', checkedActivities, selectedOperators);
             //console.log('****************** SCENARIO EVALUATED *******************************************');
 
             //console.log(`5. Optimal result for ${maintenanceActivity}:`, optimalResult);
