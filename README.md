@@ -245,24 +245,7 @@ POST   /api/download-simulation-results  # Export Excel
 - [ ] **IoT Integration** - Sensori predittivi
 - [ ] **AI Predittiva** - Machine learning avanzato
 - [ ] **Multi-tenant** - Supporto organizzazioni multiple
-
-### 🚀 Q1 2026
-- [ ] **AR/VR Training** - Formazione immersiva operatori  
-- [ ] **Blockchain** - Certificazioni manutenzione
-- [ ] **API Marketplace** - Integrazioni ERP/CRM
-- [ ] **Edge Computing** - Processing locale
-
 ---
-
-## 🏆 Riconoscimenti
-
-<div align="center">
-
-🥇 **Best Innovation Award** - Industrial Tech Summit 2024  
-🏅 **Excellence in AI** - Manufacturing Excellence Awards  
-⭐ **5 Star Rating** - TechReview Industrial Solutions  
-
-</div>
 
 ---
 
@@ -305,14 +288,6 @@ Siamo sempre alla ricerca di contributori appassionati!
 
 ---
 
-## 📜 Licenza
-
-Questo progetto è proprietario e riservato. Tutti i diritti sono riservati.
-
-**© 2025 Desdemona Project. All rights reserved.**
-
----
-
 ## 🔗 Links Utili
 
 <div align="center">
@@ -323,17 +298,6 @@ Questo progetto è proprietario e riservato. Tutti i diritti sono riservati.
 [![🐛 Issues](https://img.shields.io/badge/🐛%20Report-Issues-red?style=for-the-badge)](https://github.com/your-repo/issues)
 
 </div>
-
----
-
-## 📞 Supporto
-
-Hai domande? Siamo qui per aiutarti!
-
-- **📧 Email**: support@desdemona.com
-- **💬 Discord**: [Desdemona Community](https://discord.gg/desdemona)
-- **📱 Twitter**: [@DesdemonaAI](https://twitter.com/desdemonaai)
-- **🌐 Website**: [www.desdemona.com](https://desdemona.com)
 
 ---
 
