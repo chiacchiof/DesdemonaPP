@@ -25,8 +25,8 @@
 ### ✨ Caratteristiche Principali
 
 🧠 **Algoritmi IA Avanzati**
-- **DesBrain**: Algoritmo proprietario per matching competenze-task
-- **DesBrainV2 (Facchini)**: Implementazione metodologia TOPSIS per ranking ottimale
+- **DesBrain (UNICT)**: Algoritmo proprietario per matching competenze-task
+- **DesBrainV2 (POLIBA)**: Implementazione metodologia TOPSIS per ranking ottimale
 - **Machine Learning**: Apprendimento continuo dalle performance storiche
 
 👥 **Gestione Operatori Intelligente**
